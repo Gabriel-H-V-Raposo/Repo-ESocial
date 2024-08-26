@@ -19,6 +19,19 @@ import { authenticateWithGithub } from "./routes/auth/authenticate-with-github";
 import { env } from "@saas/env";
 import { createOrganization } from "./routes/orgs/crete-organization";
 import { getMembership } from "./routes/orgs/get-membership";
+import { getOrganization } from "./routes/orgs/get-organization";
+import { getOrganizations } from "./routes/orgs/get-organizations";
+import { updateOrganization } from "./routes/orgs/update-organization";
+import { shutdownOrganization } from "./routes/orgs/shutdown-organization";
+import { transferOrganization } from "./routes/orgs/transfer-organization";
+import { createProject } from "./routes/projects/create-project";
+import { deleteProject } from "./routes/projects/delete-project";
+import { getProject } from "./routes/projects/get-project";
+import { getProjects } from "./routes/projects/get-projects";
+import { updateProject } from "./routes/projects/update-project";
+import { getMembers } from "./routes/members/get-members";
+import { updateMember } from "./routes/members/update-member";
+import { removeMember } from "./routes/members/remove-member";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -68,6 +81,25 @@ app.register(authenticateWithGithub);
 //Orgs
 app.register(createOrganization);
 app.register(getMembership);
+app.register(getOrganization);
+app.register(getOrganizations);
+app.register(updateOrganization);
+app.register(shutdownOrganization);
+app.register(transferOrganization);
+
+//Projects
+app.register(createProject);
+app.register(getProject);
+app.register(getProjects);
+app.register(updateProject);
+app.register(deleteProject);
+
+//Members
+app.register(getMembers);
+app.register(updateMember);
+app.register(removeMember);
+
+// Token para testes: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDFhMGY4My0wMGU3LTRiYzktODg4Yi1mNDRhYTNkZTU5Y2MiLCJpYXQiOjE3MjQ2OTY0MTksImV4cCI6MTcyNTMwMTIxOX0.2KqxedQDynvEbVYXUIPdopGg9UI8a2OrbK0x-CjhnNI
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log(`Server is running on port ${env.SERVER_PORT}`);
