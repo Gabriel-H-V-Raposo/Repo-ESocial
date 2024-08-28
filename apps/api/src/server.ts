@@ -32,6 +32,8 @@ import { updateProject } from "./routes/projects/update-project";
 import { getMembers } from "./routes/members/get-members";
 import { updateMember } from "./routes/members/update-member";
 import { removeMember } from "./routes/members/remove-member";
+import { createInvite } from "./routes/invites/create-invite";
+import { getInvite } from "./routes/invites/get-invite";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -98,6 +100,10 @@ app.register(deleteProject);
 app.register(getMembers);
 app.register(updateMember);
 app.register(removeMember);
+
+//Invites
+app.register(createInvite);
+app.register(getInvite);
 
 // Token para testes: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDFhMGY4My0wMGU3LTRiYzktODg4Yi1mNDRhYTNkZTU5Y2MiLCJpYXQiOjE3MjQ2OTY0MTksImV4cCI6MTcyNTMwMTIxOX0.2KqxedQDynvEbVYXUIPdopGg9UI8a2OrbK0x-CjhnNI
 
