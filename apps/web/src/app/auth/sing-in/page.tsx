@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 
 import githubIcon from "@/assets/github-icon.svg";
+import googleIcon from "@/assets/google-icon.svg";
 import Image from "next/image";
 
 export default function SignInPage() {
@@ -42,6 +43,17 @@ export default function SignInPage() {
           className="mr-2 size-4 dark:invert"
         />
         Sing in with GitHub
+      </Button>
+
+      <Button variant="outline" type="submit" className="w-full">
+        <Image
+          src={googleIcon}
+          alt="Sing in with google"
+          width={24}
+          height={24}
+          className="mr-2 size-4"
+        />
+        Sing in with Google
       </Button>
     </form>
   );
