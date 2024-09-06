@@ -1,9 +1,10 @@
 "use server";
 
 import { z } from "zod";
-
 import { signInWithPassword } from "@/http/sing-in-with-password";
 import { HTTPError } from "ky";
+import { cookies } from "next/headers";
+
 
 const signInSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -12,7 +13,7 @@ const signInSchema = z.object({
     .min(6, { message: "Password must be at least 6 characters" }),
 });
 
-export async function signInWithEmailAndPassword(_: unknown, data: FormData) {
+export async function signInWithEmailAndPassword(data: FormData) {
   const result = signInSchema.safeParse(Object.fromEntries(data));
 
   if (!result.success) {
@@ -29,7 +30,10 @@ export async function signInWithEmailAndPassword(_: unknown, data: FormData) {
       password,
     });
 
-    console.log(token);
+    cookies().set("token", token, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 30,
+    });
   } catch (err) {
     if (err instanceof HTTPError) {
       const { message } = await err.response.json();

@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import { compare } from "bcryptjs";
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import z from "zod";
@@ -27,7 +26,7 @@ export async function authenticateWithGithub(app: FastifyInstance) {
       const { code } = request.body;
 
       const githubAuthUrl = new URL(
-        "htttps://github.com/login/oauth/access_token"
+        "https://github.com/login/oauth/access_token"
       );
 
       githubAuthUrl.searchParams.set("client_id", env.GITHUB_OAUTH_CLIENT_ID);
@@ -74,26 +73,43 @@ export async function authenticateWithGithub(app: FastifyInstance) {
       } = z
         .object({
           id: z.number().int().transform(String),
-          avatar_url: z.string().url(),
+          avatar_url: z.string().url().nullable(),
           email: z.string().email().nullable(),
           name: z.string().nullable(),
         })
         .parse(githubUserData);
+      let githubEmail;
 
       if (!email) {
-        throw new BadRequestError(
-          "Your email is not public on github or not provided"
+        const githubEmailResponse = await fetch(
+          "https://api.github.com/user/emails",
+          {
+            headers: {
+              Authorization: `Bearer ${githubAccessToken}`,
+            },
+          }
         );
+        const githubEmailData = await githubEmailResponse.json();
+        console.log(githubEmailData);
+        githubEmail = githubEmailData.find(
+          (githubEmailData: any) => githubEmailData.primary
+        );
+        console.log(githubEmail);
+        if (!githubEmail) {
+          throw new BadRequestError(
+            "Your email is not public on github or not provided"
+          );
+        }
       }
 
       let user = await prisma.user.findUnique({
-        where: { email },
+        where: { email: githubEmail.email },
       });
 
       if (!user) {
         user = await prisma.user.create({
           data: {
-            email,
+            email: githubEmail.email,
             name,
             avatarUrl,
           },
@@ -125,7 +141,7 @@ export async function authenticateWithGithub(app: FastifyInstance) {
         },
         {
           sign: {
-            expiresIn: "7d",
+            expiresIn: "30d",
           },
         }
       );

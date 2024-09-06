@@ -2,7 +2,7 @@
   "name": "@saas/api",
   "version": "0.0.0",
   "dependencies": {
-    "@fastify/cors": "^9.0.1",
+    "@fastify/cors": "10.0.0",
     "@fastify/jwt": "^8.0.1",
     "@fastify/swagger": "^8.15.0",
     "@fastify/swagger-ui": "^4.1.0",
@@ -11,7 +11,7 @@
     "@saas/env": "workspace:*",
     "bcryptjs": "^2.4.3",
     "fastify": "^4.28.1",
-    "fastify-plugin": "^4.5.1",
+    "fastify-plugin": "5.0.0",
     "fastify-type-provider-zod": "^2.0.0",
     "zod": "^3.23.8"
   },
