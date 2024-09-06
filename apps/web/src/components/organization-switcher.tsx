@@ -1,13 +1,14 @@
-import { Avatar, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { ChevronsUpDown } from "lucide-react";
+import { ChevronsUpDown, PlusCircle } from "lucide-react";
 
 export function OrganizationSwitcher() {
   return (
@@ -25,11 +26,20 @@ export function OrganizationSwitcher() {
         <DropdownMenuGroup>
           <DropdownMenuLabel>Organizations</DropdownMenuLabel>
           <DropdownMenuItem>
-            <Avatar className="size-5 mr-2">
-              <AvatarImage src="https://github.com/tanottauro.png" />
+            <Avatar className="mr-2 size-5">
+              <AvatarImage src="" />
+              <AvatarFallback />
             </Avatar>
+            <span className="line-clamp-1">Organization 1</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <a href="/create-organization">
+            <PlusCircle className="mr-2 size-5" />
+            Create New
+          </a>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
