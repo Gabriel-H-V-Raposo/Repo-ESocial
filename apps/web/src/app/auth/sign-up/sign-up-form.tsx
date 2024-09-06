@@ -16,10 +16,10 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { AlertTriangle, Loader2 } from "lucide-react";
 import { signInWithGithub } from "../actions";
 
-export default function SignUpForm() {
+export function SignUpForm() {
   const router = useRouter();
 
-  const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
+  const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
     signUpAction,
     () => {
       router.push("/auth/sign-in");
@@ -31,7 +31,7 @@ export default function SignUpForm() {
         {success == false && message && (
           <Alert variant="destructive">
             <AlertTriangle className="size-4" />
-            <AlertTitle>Sing in failed!</AlertTitle>
+            <AlertTitle>Sign in failed!</AlertTitle>
             <AlertDescription>
               <p>{message}</p>
             </AlertDescription>
@@ -43,7 +43,7 @@ export default function SignUpForm() {
         </div>
         {errors?.name && (
           <p className="text-xs font-medium text-red-500 dark:text-red-400">
-            {errors.email[0]}
+            {errors.name[0]}
           </p>
         )}
 
@@ -63,7 +63,7 @@ export default function SignUpForm() {
         </div>
         {errors?.password && (
           <p className="text-xs font-medium text-red-500 dark:text-red-400">
-            {errors.email[0]}
+            {errors.password[0]}
           </p>
         )}
 
@@ -77,7 +77,7 @@ export default function SignUpForm() {
         </div>
         {errors?.password_confirmation && (
           <p className="text-xs font-medium text-red-500 dark:text-red-400">
-            {errors.email[0]}
+            {errors.password_confirmation[0]}
           </p>
         )}
 
