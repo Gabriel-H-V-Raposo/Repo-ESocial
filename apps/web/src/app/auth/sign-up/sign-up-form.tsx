@@ -40,32 +40,32 @@ export function SignUpForm() {
         <div className="space-y-1">
           <Label htmlFor="email">Name</Label>
           <Input name="name" id="name" />
+          {errors?.name && (
+            <p className="text-xs font-medium text-red-500 dark:text-red-400">
+              {errors.name[0]}
+            </p>
+          )}
         </div>
-        {errors?.name && (
-          <p className="text-xs font-medium text-red-500 dark:text-red-400">
-            {errors.name[0]}
-          </p>
-        )}
 
         <div className="space-y-1">
           <Label htmlFor="email">Email</Label>
           <Input name="email" type="email" id="email" />
+          {errors?.email && (
+            <p className="text-xs font-medium text-red-500 dark:text-red-400">
+              {errors.email[0]}
+            </p>
+          )}
         </div>
-        {errors?.email && (
-          <p className="text-xs font-medium text-red-500 dark:text-red-400">
-            {errors.email[0]}
-          </p>
-        )}
 
         <div className="space-y-1">
           <Label htmlFor="password">Password</Label>
           <Input name="password" type="password" id="password" />
+          {errors?.password && (
+            <p className="text-xs font-medium text-red-500 dark:text-red-400">
+              {errors.password[0]}
+            </p>
+          )}
         </div>
-        {errors?.password && (
-          <p className="text-xs font-medium text-red-500 dark:text-red-400">
-            {errors.password[0]}
-          </p>
-        )}
 
         <div className="space-y-1">
           <Label htmlFor="password_confirmation">Confirm your password</Label>
@@ -74,12 +74,12 @@ export function SignUpForm() {
             type="password"
             id="password_confirmation"
           />
+          {errors?.password_confirmation && (
+            <p className="text-xs font-medium text-red-500 dark:text-red-400">
+              {errors.password_confirmation[0]}
+            </p>
+          )}
         </div>
-        {errors?.password_confirmation && (
-          <p className="text-xs font-medium text-red-500 dark:text-red-400">
-            {errors.password_confirmation[0]}
-          </p>
-        )}
 
         <Button type="submit" className="w-full" disabled={isPending}>
           {isPending ? <Loader2 className="size-4 animate-spin" /> : "Sign up"}
