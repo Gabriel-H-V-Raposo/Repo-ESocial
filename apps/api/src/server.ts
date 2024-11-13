@@ -51,8 +51,8 @@ app.setErrorHandler(errorHandler);
 app.register(fastifySwagger, {
   openapi: {
     info: {
-      title: "Next.js SaaS",
-      description: "Fullstack SaaS app",
+      title: "BjSolutions API ESocial",
+      description: "Api for managing organizations and projects",
       version: "1.0.0",
     },
     components: {

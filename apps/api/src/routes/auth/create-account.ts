@@ -19,7 +19,7 @@ export async function createAccount(app: FastifyInstance) {
         }),
         response: {
           201: z.null(),
-        },
+        },        
       },
     },
     async (request, reply) => {
@@ -39,7 +39,7 @@ export async function createAccount(app: FastifyInstance) {
         where: { domain, shouldAttachUserByDomain: true },
       });
 
-      const passwordHash = await hash(password, 6);
+      const passwordHash = await hash(password, 6);    
 
       await prisma.user.create({
         data: {
