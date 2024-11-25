@@ -1,14 +1,13 @@
 import { isAuthenticating } from "@/auth/auth";
-import { Header } from "@/components/header";
 import { redirect } from "next/navigation";
 import React from "react";
 
 export default async function AppLayout({
   children,
-  teste,
+  sheet,
 }: Readonly<{
   children: React.ReactNode;
-  teste: React.ReactNode;
+  sheet: React.ReactNode;
 }>) {
   if (!isAuthenticating()) {
     redirect("/auth/sign-in");
@@ -17,7 +16,7 @@ export default async function AppLayout({
   return (
     <>
       {children}
-      {teste}
+      {sheet}
     </>
   );
 }

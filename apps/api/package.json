@@ -27,7 +27,7 @@
     "tsx": "^4.17.0"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "pnpm env:load tsx prisma/seed.ts"
   },
   "scripts": {
     "dev": "pnpm env:load tsx watch src/server.ts",
