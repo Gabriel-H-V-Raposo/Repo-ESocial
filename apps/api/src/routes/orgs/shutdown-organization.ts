@@ -12,7 +12,7 @@ export async function shutdownOrganization(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .register(auth)
     .delete(
-      "/orgs/create-organization/:slug",
+      "/orgs/organization/:slug",
       {
         schema: {
           tags: ["Organizations"],

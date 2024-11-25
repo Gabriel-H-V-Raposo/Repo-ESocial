@@ -6,7 +6,6 @@ import z from "zod";
 import { BadRequestError } from "../_errors/bad-request-error";
 import { createSlug } from "@/lib/create-slug";
 import { getUserPermissions } from "@/lib/get-user-permissions";
-import { UnauthorizedError } from "../_errors/unauthorized-error";
 
 export async function createProject(app: FastifyInstance) {
   app
@@ -42,7 +41,7 @@ export async function createProject(app: FastifyInstance) {
         const { cannot } = getUserPermissions(userId, membership.role);
 
         if (cannot("create", "Project")) {
-          throw new UnauthorizedError("You're not allowed to create a project");
+          throw new BadRequestError("You're not allowed to create a project");
         }
 
         const { name, description } = request.body;

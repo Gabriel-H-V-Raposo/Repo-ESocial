@@ -26,7 +26,7 @@ export async function OrganizationSwitcher() {
       <DropdownMenuTrigger className="flex w-[168px] items-center gap-2 rounded p-1 text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-primary">
         {currentOrganization ? (
           <>
-            <Avatar className="mr-2 size-5">
+            <Avatar className="size-5">
               {currentOrganization.avatarUrl && (
                 <AvatarImage src={currentOrganization.avatarUrl} />
               )}
@@ -67,10 +67,10 @@ export async function OrganizationSwitcher() {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <a href="/create-organization">
+          <Link href="/create-organization">
             <PlusCircle className="mr-2 size-5" />
             Create New
-          </a>
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

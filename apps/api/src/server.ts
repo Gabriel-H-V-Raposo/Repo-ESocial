@@ -41,7 +41,7 @@ import { revokeInvite } from "./routes/invites/revoke-invite";
 import { getPendingInvites } from "./routes/invites/get-pending-invites";
 import { getOrganizationBilling } from "./routes/billing/get-organization-billing";
 
-const app = fastify().withTypeProvider<ZodTypeProvider>();
+const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>();
 
 app.setSerializerCompiler(serializerCompiler);
 app.setValidatorCompiler(validatorCompiler);

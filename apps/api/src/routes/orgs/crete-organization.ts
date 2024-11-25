@@ -20,7 +20,7 @@ export async function createOrganization(app: FastifyInstance) {
           security: [{ bearerAuth: [] }],
           body: z.object({
             name: z.string(),
-            domain: z.string().nullish(),
+            domain: z.string().nullable(),
             shouldAttachUserByDomain: z.boolean().optional(),
           }),
           response: {
@@ -52,7 +52,7 @@ export async function createOrganization(app: FastifyInstance) {
           data: {
             name,
             slug: createSlug(name),
-            domain,
+            domain: domain || null,
             shouldAttachUserByDomain,
             ownerId: userId,
             members: {
