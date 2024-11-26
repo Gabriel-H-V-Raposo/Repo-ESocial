@@ -1,4 +1,4 @@
-import { useTransition, useState, FormEvent } from "react";
+import { useTransition, useState, type FormEvent } from "react";
 
 interface FormState {
   success: boolean;
