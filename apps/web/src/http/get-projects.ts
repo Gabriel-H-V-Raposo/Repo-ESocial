@@ -19,7 +19,13 @@ interface GetProjectsResponse {
 }
 
 export async function getProjects(org: string) {
-  const result = await api.get(`${org}/projects`).json<GetProjectsResponse>();
+  const result = await api
+    .get(`${org}/projects`, {
+      next: {
+        tags: [`${org}/projects`],
+      },
+    })
+    .json<GetProjectsResponse>();
 
   return result;
 }

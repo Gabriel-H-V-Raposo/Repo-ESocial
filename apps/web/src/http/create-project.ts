@@ -13,7 +13,7 @@ export async function createProject({
   description,
   slug,
 }: CreateProjectRequest): Promise<CreateProjectResponse> {
-    await api.post(`${slug}/projects/create-project`, {
+  await api.post(`${slug}/projects/create-project`, {
     json: {
       name,
       description,

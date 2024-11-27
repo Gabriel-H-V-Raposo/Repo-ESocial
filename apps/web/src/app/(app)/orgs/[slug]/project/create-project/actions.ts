@@ -4,6 +4,7 @@ import { z } from "zod";
 import { HTTPError } from "ky";
 import { createProject } from "@/http/create-project";
 import { getCurrentOrg } from "@/auth/auth";
+import { revalidateTag } from "next/cache";
 
 const projectSchema = z.object({
   name: z.string().min(4, { message: "Name must be at least 4 characters" }),
@@ -12,6 +13,7 @@ const projectSchema = z.object({
 
 export async function createProjectAction(data: FormData) {
   const result = projectSchema.safeParse(Object.fromEntries(data));
+  const org = getCurrentOrg()!;
 
   if (!result.success) {
     const errors = result.error.flatten().fieldErrors;
@@ -25,7 +27,7 @@ export async function createProjectAction(data: FormData) {
     await createProject({
       name,
       description,
-      slug: getCurrentOrg()!,
+      slug: org,
     });
   } catch (err) {
     if (err instanceof HTTPError) {
@@ -35,6 +37,8 @@ export async function createProjectAction(data: FormData) {
     }
 
     console.error(err);
+
+    revalidateTag(`${org}/projects`);
 
     return { success: false, message: "Unexpected error", errors: null };
   }

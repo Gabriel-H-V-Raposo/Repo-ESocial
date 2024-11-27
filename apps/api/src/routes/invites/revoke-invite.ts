@@ -11,12 +11,12 @@ export async function revokeInvite(app: FastifyInstance) {
   app
     .withTypeProvider<ZodTypeProvider>()
     .register(auth)
-    .post(
+    .delete(
       "/:slug/invites/revoke-invite/:inviteId",
       {
         schema: {
           tags: ["Invites"],
-          summary: "Create new invite",
+          summary: "revoke new invite",
           security: [{ bearerAuth: [] }],
           params: z.object({
             slug: z.string(),
