@@ -37,8 +37,8 @@ export default async function Settings() {
               <OrganizationForm
                 isUpdating
                 initialData={{
-                  domain: organization.domain,
                   name: organization.name,
+                  domain: organization.domain,
                   shouldAttachUserByDomain:
                     organization.shouldAttachUserByDomain,
                 }}

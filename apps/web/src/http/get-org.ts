@@ -16,7 +16,7 @@ interface GetOrgResponse {
 
 export async function getOrg(org: string) {
   const result = await api
-    .get(`orgs/${org}/membership`)
+    .get(`orgs/organizations/${org}`)
     .json<GetOrgResponse>();
 
   return result;
