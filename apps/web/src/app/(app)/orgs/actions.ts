@@ -5,8 +5,9 @@ import { HTTPError } from "ky";
 import { createOrganization } from "@/http/create-organization";
 import { getCurrentOrg } from "@/auth/auth";
 import { updateOrganization } from "@/http/update-organization";
+import { revalidateTag } from "next/cache";
 
-export const organizationSchema = z
+const organizationSchema = z
   .object({
     name: z.string().min(4, { message: "Name must be at least 4 characters" }),
     domain: z
@@ -61,6 +62,8 @@ export async function createOrganizationAction(data: FormData) {
       domain,
       shouldAttachUserByDomain,
     });
+
+    revalidateTag("organizations");
   } catch (err) {
     if (err instanceof HTTPError) {
       const { message } = await err.response.json();
@@ -100,6 +103,8 @@ export async function updateOrganizationAction(data: FormData) {
       domain,
       shouldAttachUserByDomain,
     });
+
+    revalidateTag("organizations");
   } catch (err) {
     if (err instanceof HTTPError) {
       const { message } = await err.response.json();

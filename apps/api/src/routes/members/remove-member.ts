@@ -22,9 +22,6 @@ export async function removeMember(app: FastifyInstance) {
             slug: z.string(),
             memberId: z.string().uuid(),
           }),
-          body: z.object({
-            role: roleSchema,
-          }),
           response: {
             204: z.null(),
           },

@@ -52,7 +52,7 @@ export function OrganizationForm({
       <div className="space-y-1">
         <Label htmlFor="domain">E-mail domain</Label>
         <Input
-          defaultValue={initialData?.domain ?? "undefined"}
+          defaultValue={initialData?.domain ?? ""}
           name="domain"
           type="text"
           id="domain"
