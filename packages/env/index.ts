@@ -17,7 +17,7 @@ export const env = createEnv({
   },
   client: {},
   shared: {
-    NODE_ENV: z.string(),
+    NODE_ENV: z.string().default("dev"),
     NEXT_PUBLIC_API_URL: z.string().url(),
   },
   runtimeEnv: {
