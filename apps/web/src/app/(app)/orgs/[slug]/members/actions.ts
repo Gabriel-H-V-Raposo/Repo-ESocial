@@ -2,7 +2,6 @@
 
 import { getCurrentOrg } from "@/auth/auth";
 import { createInvite } from "@/http/create-invite";
-import { createProject } from "@/http/create-project";
 import { removeMember } from "@/http/remove-member";
 import { revokeInvite } from "@/http/revoke-invite";
 import { updateMember } from "@/http/update-member";
