@@ -32,11 +32,12 @@
   },
   "scripts": {
     "dev": "pnpm env:load tsx watch src/server.ts",
-    "db:migrate": "pnpm env:load prisma migrate dev",
+    "db:migrateDev": "pnpm env:load prisma migrate dev",
+    "db:migrateDep": "pnpm env:load prisma generate && pnpm env:load prisma migrate deploy",
     "db:studio": "pnpm env:load prisma studio",
     "env:load": "dotenv -e ../../.env --",
     "start": "node dist/server.js",
-    "build": "tsup"
+    "build": "docker-compose up -d && pnpm db:migrateDep && tsup"
   },
   "eslintConfig": {
     "extends": [
