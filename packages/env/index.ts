@@ -48,7 +48,8 @@ export const env = createEnv({
       "http://localhost:3000/api/auth/callback",
 
     NEXT_PUBLIC_API_URL:
-      process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3334/",
+      process.env.NEXT_PUBLIC_API_URL ??
+      "https://apiesocial.bjsolutions.com.br",
   },
   emptyStringAsUndefined: true,
 });
