@@ -26,7 +26,6 @@
     "prisma": "^5.18.0",
     "tsup": "^8.3.5",
     "tsx": "^4.17.0"
-    
   },
   "prisma": {
     "seed": "pnpm env:load tsx prisma/seed.ts"
