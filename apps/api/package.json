@@ -37,7 +37,7 @@
     "db:studio": "pnpm env:load prisma studio",
     "env:load": "dotenv -e ../../.env --",
     "start": "node dist/server.js",
-    "build": "docker-compose up -d && pnpm db:migrateDep && tsup"
+    "build": "docker compose up -d && pnpm db:migrateDep && tsup"
   },
   "eslintConfig": {
     "extends": [
