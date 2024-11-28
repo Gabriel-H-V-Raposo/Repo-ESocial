@@ -8,6 +8,7 @@
     "@saas/eslint-config": "workspace:*",
     "@saas/prettier": "workspace:*",
     "@saas/tsconfig": "workspace:*"
+    
   },
   "eslintConfig": {
     "extends": [
