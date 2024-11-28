@@ -119,8 +119,6 @@ app.register(getPendingInvites);
 //Billing
 app.register(getOrganizationBilling);
 
-// Token para testes: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDFhMGY4My0wMGU3LTRiYzktODg4Yi1mNDRhYTNkZTU5Y2MiLCJpYXQiOjE3MjQ2OTY0MTksImV4cCI6MTcyNTMwMTIxOX0.2KqxedQDynvEbVYXUIPdopGg9UI8a2OrbK0x-CjhnNI
-
-app.listen({ port: env.SERVER_PORT }).then(() => {
-  console.log(`Server is running on port ${env.SERVER_PORT}`);
+app.listen({ port: env.PORT }).then(() => {
+  console.log(`Server is running on port ${env.PORT}`);
 });

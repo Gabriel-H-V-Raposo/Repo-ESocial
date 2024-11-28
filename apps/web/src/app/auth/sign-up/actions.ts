@@ -3,6 +3,8 @@
 import { z } from "zod";
 import { HTTPError } from "ky";
 import { signUp } from "@/http/sign-up";
+import { acceptInvite } from "@/http/accept-invite";
+import { cookies } from "next/headers";
 
 const signUpSchema = z
   .object({

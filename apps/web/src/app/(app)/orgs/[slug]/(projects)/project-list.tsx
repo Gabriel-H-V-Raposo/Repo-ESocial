@@ -33,7 +33,7 @@ export default async function ProjectList() {
         return (
           <Card key={project.id} className="flex flex-col justify-between">
             <CardHeader>
-              <CardTitle className="text-xl font-semibold">
+              <CardTitle className="truncate text-xl font-semibold">
                 {project.name}
               </CardTitle>
               <CardDescription className="line-clamp-2 leading-relaxed">
@@ -67,4 +67,11 @@ export default async function ProjectList() {
       })}
     </div>
   );
+}
+
+{
+  /* <Link href={`/orgs/${orgSlug}/project/create-project`}>
+            <PlusCircle className="mr-2 size-5" />
+            Create New
+          </Link> */
 }

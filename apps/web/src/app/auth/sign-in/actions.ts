@@ -4,7 +4,7 @@ import { z } from "zod";
 import { signInWithPassword } from "@/http/sing-in-with-password";
 import { HTTPError } from "ky";
 import { cookies } from "next/headers";
-
+import { acceptInvite } from "@/http/accept-invite";
 
 const signInSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -34,6 +34,15 @@ export async function signInWithEmailAndPassword(data: FormData) {
       path: "/",
       maxAge: 60 * 60 * 24 * 30,
     });
+
+    const inviteId = cookies().get("inviteId")?.value;
+
+    if (inviteId) {
+      try {
+        await acceptInvite(inviteId);
+        cookies().delete("inviteId");
+      } catch {}
+    }
   } catch (err) {
     if (err instanceof HTTPError) {
       const { message } = await err.response.json();

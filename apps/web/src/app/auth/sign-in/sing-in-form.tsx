@@ -14,11 +14,12 @@ import Image from "next/image";
 import { signInWithEmailAndPassword } from "./actions";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useFormState } from "@/hooks/use-form-state";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signInWithGithub } from "../actions";
 
 export function SignInForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
     signInWithEmailAndPassword,
@@ -42,7 +43,12 @@ export function SignInForm() {
 
         <div className="space-y-1">
           <Label htmlFor="email">Email</Label>
-          <Input name="email" type="email" id="email" />
+          <Input
+            name="email"
+            type="email"
+            id="email"
+            defaultValue={searchParams.get("email") ?? ""}
+          />
 
           {errors?.email && (
             <p className="text-xs font-medium text-red-500 dark:text-red-400">
