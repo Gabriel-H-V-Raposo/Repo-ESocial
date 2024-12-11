@@ -37,7 +37,8 @@
     "db:studio": "pnpm env:load prisma studio",
     "env:load": "dotenv -e ../../.env --",
     "start": "node dist/server.js",
-    "build": "docker compose up -d && pnpm db:migrateDep && tsup"
+    "build": "docker compose up -d && pnpm db:migrateDep && tsup",
+    "deploy": "git pull && pnpm i && npx prisma migrate deploy && pnpm build && pm2 restart esocial-api"
   },
   "eslintConfig": {
     "extends": [
