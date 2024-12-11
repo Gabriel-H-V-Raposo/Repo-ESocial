@@ -7,7 +7,8 @@
     "build": "pnpm env:load next build --no-lint",
     "start": "pnpm env:load next start",
     "lint": "next lint",
-    "env:load": "dotenv -e ../../.env --"
+    "env:load": "dotenv -e ../../.env --",
+    "deploy": "git pull && pnpm i && npx prisma migrate deploy && pnpm next build && pm2 restart esocial-web"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.1",
