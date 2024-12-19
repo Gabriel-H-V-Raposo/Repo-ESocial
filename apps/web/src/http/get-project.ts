@@ -19,7 +19,9 @@ interface GetProjectResponse {
 
 export async function getProject(org: string, project: string) {
   const result = await api
-    .get(`/${org}/projects/${project}/get-project`)
+    .get(`/${org}/projects/${project}/get-project`, {
+      next: { tags: ["project"] },
+    })
     .json<GetProjectResponse>();
 
   return result;

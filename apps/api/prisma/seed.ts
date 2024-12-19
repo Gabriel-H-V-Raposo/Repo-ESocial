@@ -239,5 +239,6 @@ async function seed() {
 }
 
 seed().then(() => {
+  // eslint-disable-next-line no-undef
   console.log("Seed complete");
 });

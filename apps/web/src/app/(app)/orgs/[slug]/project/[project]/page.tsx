@@ -16,15 +16,27 @@ import { Loader2 } from "lucide-react";
 import { parseStringPromise } from "xml2js";
 import { useParams } from "next/navigation";
 import { getOrganization } from "@/http/get-organization";
+import { useQuery } from "@tanstack/react-query";
+import { getProject } from "@/http/get-project";
 
 export default function Project() {
   const slugOrg = getOrganization();
-  const { project: projectSlug } = useParams<{ project: string }>();
 
   const [files, setFiles] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+
+  const { slug: orgSlug, project: projectSlug } = useParams<{
+    slug: string;
+    project: string;
+  }>();
+
+  const { data: project, isLoading: isLoadingProject } = useQuery({
+    queryKey: [orgSlug, "project"],
+    queryFn: () => getProject(orgSlug, projectSlug),
+    enabled: !!orgSlug,
+  });
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -60,7 +72,7 @@ export default function Project() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold">Project - {projectSlug}</h1>
+      <h1 className="text-2xl font-bold">Project - {project?.project.name}</h1>
       <label className="block">
         <span className="sr-only">Choose files</span>
         <Input
