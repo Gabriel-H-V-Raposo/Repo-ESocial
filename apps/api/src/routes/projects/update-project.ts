@@ -20,8 +20,9 @@ export async function updateProject(app: FastifyInstance) {
           summary: "Update project by slug and organization",
           security: [{ bearerAuth: [] }],
           body: z.object({
-            name: z.string(),
-            description: z.string(),
+            name: z.string().optional(),
+            description: z.string().optional(),
+            content: z.object({}).passthrough().optional(),
           }),
           params: z.object({
             slug: z.string(),

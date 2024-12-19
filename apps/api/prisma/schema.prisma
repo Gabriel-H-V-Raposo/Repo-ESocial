@@ -119,6 +119,8 @@ model Project {
   id          String   @id @default(uuid())
   name        String
   description String?
+  content     Json?
+  typeContent String?  @map("type_content")
   slug        String   @unique
   avatarUrl   String?  @map("avatar_url")
   createdAt   DateTime @default(now()) @map("created_at")

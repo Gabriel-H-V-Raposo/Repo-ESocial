@@ -1,7 +1,5 @@
 import { FastifyInstance } from "fastify";
 import { ZodError } from "zod";
-import { BadRequestError } from "./routes/_errors/bad-request-error";
-import { UnauthorizedError } from "./routes/_errors/unauthorized-error";
 
 type FastifyErrorHandler = FastifyInstance["errorHandler"];
 
@@ -14,23 +12,15 @@ export const errorHandler: FastifyErrorHandler = (error, request, reply) => {
     return;
   }
 
-  if (error instanceof BadRequestError) {
-    reply.status(400).send({
-      message: error.message,
-    });
-    return;
-  }
-
-  if (error instanceof UnauthorizedError) {
-    reply.status(401).send({
-      message: error.message,
-    });
+  if ("statusCode" in error) {
+    const { statusCode, message, details } = error as any;
+    reply.status(statusCode).send({ message, details });
     return;
   }
 
   console.error(error);
 
-  // send erro to some observability tool
+  //TODO: enviar o erro para alguma ferramenta de observabilidade
 
-  return reply.status(500).send({ mensagem: "Internal server error" });
+  reply.status(500).send({ message: "Internal server error" });
 };

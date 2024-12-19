@@ -1,5 +1,7 @@
-export class BadRequestError extends Error {
+import { HttpError } from "./http-error";
+
+export class BadRequestError extends HttpError {
   constructor(message?: string) {
-    super(message ?? "Bad Request");
+    super(400, message ?? "Bad Request");
   }
 }
